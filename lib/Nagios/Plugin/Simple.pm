@@ -4,7 +4,7 @@ use warnings;
 
 BEGIN {
   use vars qw($VERSION);
-  $VERSION     = '0.02';
+  $VERSION     = '0.03';
 }
 
 =head1 NAME
@@ -64,6 +64,8 @@ sub initialize {
 
 =head2 ok
 
+Exits script with ok status code.
+
 Prints "OK: %s" and exits with a code 0.
 
   $nps->ok("I'm OK");
@@ -75,12 +77,12 @@ Prints "OK: %s" and exits with a code 0.
 sub ok {
   my $self=shift;
   my $string=shift;
-  $string='' unless defined($string);
-  printf "OK: %s\n", $string;
-  exit 0;
+  $self->status(OK=>$string);
 }
 
 =head2 warning
+
+Exits script with warning status code.
 
 Prints "Warning: %s" and exits with a code 1.
 
@@ -93,12 +95,12 @@ Prints "Warning: %s" and exits with a code 1.
 sub warning {
   my $self=shift;
   my $string=shift;
-  $string='' unless defined($string);
-  printf "Warning: %s\n", $string;
-  exit 1;
+  $self->status(Warning=>$string);
 }
 
 =head2 critical
+
+Exits script with critical status code.
 
 Prints "Critical: %s" and exits with a code 2.
 
@@ -111,12 +113,12 @@ Prints "Critical: %s" and exits with a code 2.
 sub critical {
   my $self=shift;
   my $string=shift;
-  $string='' unless defined($string);
-  printf "Critical: %s\n", $string;
-  exit 2;
+  $self->status(Critical=>$string);
 }
 
 =head2 unknown
+
+Exits script with unknown status code.
 
 Prints "Unknown: %s" and exits with a code 3.
 
@@ -129,9 +131,78 @@ Prints "Unknown: %s" and exits with a code 3.
 sub unknown {
   my $self=shift;
   my $string=shift;
+  $self->status(Unknown=>$string);
+}
+
+=head2 code
+
+Exits script by status code.  This works best if your status is actually stored as a code 0, 1, 2, or 3 in a variable.
+
+  $nps->code($code => $string);
+
+Examples:
+
+  $nps->code(0 => "I'm OK!");
+  $nps->code(1 => "I'm a bit sickly");
+  $nps->code(2 => "Barf...");
+  $nps->code(3 => "Huh?")
+
+Prints ``$status: %s'' and exits with $code.
+
+=cut
+
+sub code {
+  my $self=shift;
+  my $code=shift;
+  my $string=shift;
+  my %status=reverse $self->codes;
+  my $status=$status{$code};
+  $self->status($status, $string);
+}
+
+=head2 status
+
+Exits script by status string.  This works best if your string is actually stored as "OK", "Warning", etc in a variable
+
+  $nps->status($status    => $string);
+
+Examples:
+
+  $nps->status("OK"       => "I'm OK!");
+  $nps->status("Warning"  => "I'm a bit sickly");
+  $nps->status("Critical" => "Barf...");
+  $nps->status("Unknown"  => "Huh?")
+
+Prints ``$status: %s'' and exits with correct code.
+
+=cut
+
+sub status {
+  my $self=shift;
+  my $status=shift;
+  my $string=shift;
   $string='' unless defined($string);
-  printf "Unknown: %s\n", $string;
-  exit 3;
+  my %codes=map {uc($_)} $self->codes;
+  #use Data::Dumper;
+  #print Dumper([\%codes]);
+  my $code=$codes{uc($status)};
+  die(qq{Error: Exit code not defined for "$status"}) unless defined($code);
+  printf "%s: %s\n", $status, $string;
+  exit $code;
+}
+
+=head2 codes
+
+  my %codes=$nps->codes;           #(OK=>0, Warning=>1, Critical=>2, Unknown=>3)
+  my $codes=$nps->codes;           #{OK=>0, Warning=>1, Critical=>2, Unknown=>3}
+  my %status=reverse $self->codes; #(0=>"OK", 1=>"Warning", ...)
+  
+=cut
+
+sub codes {
+ #my $self=shift;
+  my @data=(OK=>0, Warning=>1, Critical=>2, Unknown=>3);
+  return wantarray ? @data : {@data};
 }
 
 =head1 BUGS

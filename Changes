@@ -6,3 +6,6 @@ Revision history for Perl module Nagios::Plugin::Simple
   - ok() no longer gives undef warning
   - Documentation
   - Updated tests
+0.03 2008-10-29T21:49:00Z
+  - added status, code and codes methods
+  - changed all methods to call status method

@@ -1,9 +1,10 @@
+Changes
+lib/Nagios/Plugin/Simple.pm
+LICENSE
+Makefile.PL
 MANIFEST
 README
-LICENSE
-Todo
-Changes
-Makefile.PL
-lib/Nagios/Plugin/Simple.pm
 t/001_load.t
+t/002_methods.t
+Todo
 META.yml                                 Module meta-data (added by MakeMaker)
