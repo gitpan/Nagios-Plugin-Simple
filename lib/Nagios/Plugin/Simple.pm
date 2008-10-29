@@ -4,7 +4,7 @@ use warnings;
 
 BEGIN {
   use vars qw($VERSION);
-  $VERSION     = '0.03';
+  $VERSION     = '0.04';
 }
 
 =head1 NAME
@@ -66,9 +66,9 @@ sub initialize {
 
 Exits script with ok status code.
 
-Prints "OK: %s" and exits with a code 0.
-
   $nps->ok("I'm OK");
+
+Prints "OK: %s" and exits with a code 0.
 
   STDOUT => "OK: I'm OK\n",  EXIT=>0
 
@@ -84,9 +84,9 @@ sub ok {
 
 Exits script with warning status code.
 
-Prints "Warning: %s" and exits with a code 1.
-
   $nps->warning("I'm a bit sickly");
+
+Prints "Warning: %s" and exits with a code 1.
 
   STDOUT => "Warning: I'm a bit sickly\n",  EXIT=>1
 
@@ -102,9 +102,9 @@ sub warning {
 
 Exits script with critical status code.
 
-Prints "Critical: %s" and exits with a code 2.
-
   $nps->critical("Barf...");
+
+Prints "Critical: %s" and exits with a code 2.
 
   STDOUT => "Critical: Barf...\n",  EXIT=>2
 
@@ -120,9 +120,9 @@ sub critical {
 
 Exits script with unknown status code.
 
-Prints "Unknown: %s" and exits with a code 3.
-
   $nps->unknown("Huh?")
+
+Prints "Unknown: %s" and exits with a code 3.
 
   STDOUT => "Unknown: Huh?\n",  EXIT=>3
 
@@ -193,10 +193,12 @@ sub status {
 
 =head2 codes
 
+Returns a hash of the Nagios status codes.
+
   my %codes=$nps->codes;           #(OK=>0, Warning=>1, Critical=>2, Unknown=>3)
   my $codes=$nps->codes;           #{OK=>0, Warning=>1, Critical=>2, Unknown=>3}
   my %status=reverse $self->codes; #(0=>"OK", 1=>"Warning", ...)
-  
+
 =cut
 
 sub codes {

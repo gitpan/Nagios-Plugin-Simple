@@ -9,3 +9,6 @@ Revision history for Perl module Nagios::Plugin::Simple
 0.03 2008-10-29T21:49:00Z
   - added status, code and codes methods
   - changed all methods to call status method
+0.04 2008-10-29T22:06:00Z
+  - POD issue
+  - Documentation
