@@ -12,3 +12,5 @@ Revision history for Perl module Nagios::Plugin::Simple
 0.04 2008-10-29T22:06:00Z
   - POD issue
   - Documentation
+0.05 2009-10-11T03:03:00Z
+  - changed perl -e 'xxx' to perl -e "xxx" so that tests work on Win32

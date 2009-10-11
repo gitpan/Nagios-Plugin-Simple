@@ -5,7 +5,7 @@ WriteMakefile(
     AUTHOR       => 'Michael R. Davis (account=>perl,tld=>com,domain=>michaelrdavis)',
     ABSTRACT     => 'Simple and Minimalistic Nagios Plugin Package',
     PREREQ_PM    => {
-                     'Test::Simple' => 0.44, #for Test::More
+                     'Test::Simple' => 0.44,
                      'strict'       => 0,
                      'warnings'     => 0,
                     },
