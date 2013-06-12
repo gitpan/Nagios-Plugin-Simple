@@ -6,7 +6,5 @@ WriteMakefile(
     ABSTRACT     => 'Simple and Minimalistic Nagios Plugin Package',
     PREREQ_PM    => {
                      'Test::Simple' => 0.44,
-                     'strict'       => 0,
-                     'warnings'     => 0,
                     },
 );

@@ -1,13 +1,14 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         Nagios-Plugin-Simple
-version:      0.05
-version_from: lib/Nagios/Plugin/Simple.pm
-installdirs:  site
-requires:
-    strict:                        0
+--- #YAML:1.0
+name:                Nagios-Plugin-Simple
+version:             0.06
+abstract:            Simple and Minimalistic Nagios Plugin Package
+license:             ~
+author:              
+    - Michael R. Davis (account=>perl,tld=>com,domain=>michaelrdavis)
+generated_by:        ExtUtils::MakeMaker version 6.42
+distribution_type:   module
+requires:     
     Test::Simple:                  0.44
-    warnings:                      0
-
-distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.30
+meta-spec:
+    url:     http://module-build.sourceforge.net/META-spec-v1.3.html
+    version: 1.3

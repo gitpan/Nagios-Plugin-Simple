@@ -7,4 +7,5 @@ README
 t/001_load.t
 t/002_methods.t
 Todo
+perl-Nagios-Plugin-Simple.spec
 META.yml                                 Module meta-data (added by MakeMaker)
